@@ -1,0 +1,39 @@
+<h1>Yor shopping cart</h1>
+
+<div id="card">
+    {{#if  coursesInCart.length}}
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each coursesInCart}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>{{count}}</td>
+                    <td>
+                        <button class="btn btn-small red lighten-2 js-remove" data-id="{{id}}">
+                            <i class="small material-icons js-remove" data-id="{{id}}">clear</i>
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+
+            </tbody>
+        </table>
+
+        <div>
+        </div>
+        <div>
+            <hr>
+            <strong>Total price: <span class="price">{{price}}</span></strong>
+        </div>
+
+    {{else}}
+        <p>Your cart is empty</p>
+    {{/if}}
+</div>
