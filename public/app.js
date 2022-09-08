@@ -1,5 +1,5 @@
 const getCurrency = price => {
-  return new Intl.NumberFormat('en-EN', {
+  return new Intl.NumberFormat('en-US', {
     currency: 'usd',
     style: 'currency'
   }).format(price)
@@ -7,6 +7,20 @@ const getCurrency = price => {
 
 document.querySelectorAll('.price').forEach(node => {
   node.textContent = getCurrency(node.textContent)
+})
+
+const formatData = date => {
+  return new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(date))
+}
+document.querySelectorAll('.date').forEach(node => {
+  node.textContent = formatData(node.textContent)
 })
 
 const $card = document.querySelector('#card')

@@ -28,10 +28,12 @@
 
         <div>
         </div>
-        <div>
             <hr>
             <strong>Total price: <span class="price">{{price}}</span></strong>
-        </div>
+
+        <form action="/orders" method="post">
+            <button type="submit" class="btn">Make an order</button>
+        </form>
 
     {{else}}
         <p>Your cart is empty</p>

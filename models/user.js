@@ -3,24 +3,24 @@ const {Schema, model} = require('mongoose')
 const userSchema = new Schema({
   email: {
     type: String,
-    require: true
+    required: true
   },
   name: {
     type: String,
-    require: true
+    required: true
   },
   cart: {
     items: [
       {
         count: {
           type: Number,
-          require: true,
+          required: true,
           default: 1
         },
         courseId: {
           type: Schema.Types.ObjectId,
           ref: 'Course',
-          require: true,
+          required: true,
         }
       }
     ]
@@ -59,6 +59,11 @@ userSchema.methods.removeFromCart = function(id) {
 
   this.cart = {items}
 
+  return this.save()
+}
+
+userSchema.methods.clearCart = function() {
+  this.cart = {items: []}
   return this.save()
 }
 

@@ -3,11 +3,11 @@ const {Schema, model} = require('mongoose')
 const courseSchema = new Schema({
   title: {
     type: String,
-    require: true
+    required: true
   },
   price: {
     type: Number,
-    require: true
+    required: true
   },
   img: String,
   userId: {
