@@ -50,3 +50,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.btn-remove {
+    margin-top: 20px;
+}
