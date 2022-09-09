@@ -1,23 +1,9 @@
 .nav-wrapper {
-    padding-left: 15px ;
+    padding-left: 15px;
 }
 
 .container {
     height: 75%;
-}
-
-.row-container .row .col.s6 {
-    width: 85%;
-    margin: 0;
-}
-
-.row-container {
-    display: flex;
-   justify-content: space-between;
-}
-.row .courses{
-    display: flex;
-    justify-content: center;
 }
 
 .course {
@@ -37,7 +23,7 @@
     height: auto;
 }
 
-.card-image img{
+.card-image img {
     width: 160px;
     height: 160px;
 }
@@ -45,6 +31,7 @@
 .card-action {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .btn-remove {
