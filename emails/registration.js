@@ -1,9 +1,10 @@
+require('dotenv').config()
 const keys = require('../keys')
 
 module.exports = function (userEmail) {
   return {
     to: userEmail,
-    from: keys.EMAIL_FROM,
+    from: process.env.EMAIL_FROM,
     subject: 'The account was created successfully',
     html: `
     <h1>Welcome to our store</h1>

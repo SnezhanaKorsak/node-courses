@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
 const csrf = require('csurf')
 const flash = require('connect-flash')
+require('dotenv').config()
 
 const path = require('path')
 
@@ -32,7 +33,7 @@ const hbs = exphbs.create({
 
 const store = new MongoStore({
   collection: 'sessions',
-  uri: keys.MONGODB_URI
+  uri: process.env.MONGODB_URI
 })
 
 app.engine('hbs', hbs.engine)
@@ -42,7 +43,7 @@ app.set('views', 'views')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(session({
-  secret: keys.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store
@@ -63,7 +64,7 @@ app.use('/auth', authRoutes)
 
 async function start() {
   try {
-    await mongoose.connect(keys.MONGODB_URI, { useNewUrlParser: true })
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
 
     app.listen(keys.PORT, () => {
       console.log(`Server is running on port ${keys.PORT}`)
