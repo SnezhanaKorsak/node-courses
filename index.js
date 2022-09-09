@@ -1,11 +1,12 @@
 const Handlebars = require('handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const exphbs = require('express-handlebars')
+const express = require('express')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
+const csrf = require('csurf')
 
-const express = require('express')
 const path = require('path')
 
 const varMiddleware = require('./middleware/variables')
@@ -45,6 +46,9 @@ app.use(session({
   saveUninitialized: false,
   store
 }))
+
+app.use(csrf())
+
 app.use(varMiddleware)
 app.use(userMiddleware)
 
