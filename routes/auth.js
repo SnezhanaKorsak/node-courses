@@ -72,9 +72,9 @@ router.post('/register', async (req, res) => {
       const user = new User({ name, email, password: hashPassword, cart: { items: [] } })
 
 
+      await transporter.sendMail(regEmail(email))
       await user.save()
       res.redirect('/auth/login#login')
-      await transporter.sendMail(regEmail(email))
 
     }
   } catch (e) {
@@ -82,19 +82,5 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.get('/reset', (req, res) => {
-  res.render('auth/reset', {
-    title: 'Reset password',
-    error: req.flash('error')
-  })
-})
-
-router.post('/reset', async (req, res) => {
-  try {
-
-  } catch (e) {
-    console.log(e)
-  }
-})
 
 module.exports = router
