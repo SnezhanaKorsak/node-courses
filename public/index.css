@@ -69,4 +69,8 @@
     animation: slideIn 1s ease;
 }
 
-
+.avatar {
+    width: 250px;
+    height: auto;
+    border-radius: 50%;
+}
