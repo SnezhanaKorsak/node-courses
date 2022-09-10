@@ -1,7 +1,9 @@
 const { Router } = require('express')
+const { validationResult } = require('express-validator')
 
 const Course = require('../models/course')
 const auth = require('../middleware/auth')
+const { courseAddValidators } = require('../utils/validators')
 
 const router = Router()
 
@@ -13,7 +15,7 @@ router.get('/', async (req, res) => {
       title: 'Courses',
       isCourses: true,
       userId: req.user ? req.user._id.toString() : null,
-      courses
+      courses,
     })
   } catch (e) {
     console.log(e)
@@ -30,18 +32,28 @@ router.get('/:id/edit', auth, async (req, res) => {
 
     res.render('course-edit', {
       title: 'Edit',
-      course
+      course,
+      editError: req.flash('editError'),
     })
   } catch (e) {
     console.log(e)
   }
 })
 
-router.post('/edit', auth, async (req, res) => {
+router.post('/edit', courseAddValidators, auth, async (req, res) => {
   const { id, ...data } = req.body
-  await Course.findByIdAndUpdate(id, data)
+  const errors = validationResult(req)
 
-  res.redirect('/courses')
+  if (!errors.isEmpty()) {
+    req.flash('editError', errors.array()[0].msg)
+    return res.status(422).redirect(`/courses/${id}/edit?allow=true`)
+  }
+  try {
+    await Course.findByIdAndUpdate(id, data)
+    res.redirect('/courses')
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 router.post('/remove', auth, async (req, res) => {

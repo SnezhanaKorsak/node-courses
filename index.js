@@ -13,6 +13,7 @@ const path = require('path')
 
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
+const errorHandler = require('./middleware/error')
 
 const homeRoutes = require('./routes/home')
 const coursesRoutes = require('./routes/courses')
@@ -62,6 +63,8 @@ app.use('/add', addRoutes)
 app.use('/card', cardRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
+
+app.use(errorHandler)
 
 async function start() {
   try {
